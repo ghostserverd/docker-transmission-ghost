@@ -2,6 +2,8 @@
 
 TRANS_WEBUI_USER=${TRANS_WEBUI_USER:-admin}
 TRANS_WEBUI_PASS=${TRANS_WEBUI_PASS:-adminadmin}
+TRANS_WEBUI_PORT=${TRANS_WEBUI_PORT:-9091}
+TRANS_CONNECTION_PORT=${TRANS_CONNECTION_PORT:-51413}
 
 CONFIG_FILE="/config/settings.json"
 CONFIG_STR=$(cat <<'HEREDOC'
@@ -33,7 +35,7 @@ CONFIG_STR=$(cat <<'HEREDOC'
     "peer-id-ttl-hours": 6,
     "peer-limit-global": 2000,
     "peer-limit-per-torrent": 200,
-    "peer-port": 51413,
+    "peer-port": CONN_PORT,
     "peer-port-random-high": 65535,
     "peer-port-random-low": 49152,
     "peer-port-random-on-start": false,
@@ -52,10 +54,10 @@ CONFIG_STR=$(cat <<'HEREDOC'
     "rpc-enabled": true,
     "rpc-host-whitelist": "",
     "rpc-host-whitelist-enabled": true,
-    "rpc-password": "TRANS_PASS",
-    "rpc-port": 9091,
+    "rpc-password": "WEBUI_PASS",
+    "rpc-port": WEBUI_PORT,
     "rpc-url": "/transmission/",
-    "rpc-username": "TRANS_USER",
+    "rpc-username": "WEBUI_USER",
     "rpc-whitelist": "127.0.0.1",
     "rpc-whitelist-enabled": false,
     "scrape-paused-torrents-enabled": true,
@@ -63,9 +65,9 @@ CONFIG_STR=$(cat <<'HEREDOC'
     "script-torrent-done-filename": "/usr/local/bin/transmission-postprocess.sh",
     "seed-queue-enabled": false,
     "seed-queue-size": 10,
-    "speed-limit-down": 101,
+    "speed-limit-down": 100,
     "speed-limit-down-enabled": false,
-    "speed-limit-up": 101,
+    "speed-limit-up": 100,
     "speed-limit-up-enabled": false,
     "start-added-torrents": true,
     "trash-original-torrent-files": false,
@@ -78,8 +80,10 @@ CONFIG_STR=$(cat <<'HEREDOC'
 HEREDOC
 )
 
-CONFIG_STR=${CONFIG_STR/TRANS_USER/$TRANS_WEBUI_USER}
-CONFIG_STR=${CONFIG_STR/TRANS_PASS/$TRANS_WEBUI_PASS}
+CONFIG_STR=${CONFIG_STR/WEBUI_USER/$TRANS_WEBUI_USER}
+CONFIG_STR=${CONFIG_STR/WEBUI_PASS/$TRANS_WEBUI_PASS}
+CONFIG_STR=${CONFIG_STR/WEBUI_PORT/$TRANS_WEBUI_PORT}
+CONFIG_STR=${CONFIG_STR/CONN_PORT/$TRANS_CONNECTION_PORT}
 
 rm /config/settings.json
 echo "$CONFIG_STR" > /config/settings.json
