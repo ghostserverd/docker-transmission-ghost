@@ -1,4 +1,7 @@
 #!/usr/bin/with-contenv bash
 
+TRANS_MAX_RETENTION=${TRANS_MAX_RETENTION:-2592000}
+TRANS_MAX_RATIO=${TRANS_MAX_RATIO:-10}
+
 chown -R abc:abc \
         /usr/local/bin
