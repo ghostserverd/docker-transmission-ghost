@@ -9,6 +9,8 @@ WORKDIR /usr/local/bin
 COPY transmission-garbagecollect.sh transmission-garbagecollect.sh
 RUN chmod +rx transmission-garbagecollect.sh
 
+RUN echo "0 3 * * * /usr/local/bin/transmission-garbagecollect.sh 2>&1" >> /etc/crontabs/root
+
 # add default post process
 COPY transmission-postprocess.sh transmission-postprocess.sh
 RUN chmod +rx transmission-postprocess.sh
