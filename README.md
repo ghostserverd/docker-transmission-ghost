@@ -1,2 +1,2 @@
 # docker-transmission-ghost
-config wrapper around linuxserver/nzbget
+config wrapper around linuxserver/transmission
