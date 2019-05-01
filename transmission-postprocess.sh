@@ -7,9 +7,10 @@ ARG_LABEL="N/A"
 
 # Configuration
 CONFIG_OUTPUT="/media"
+FILEBOT_PORT=${FILEBOT_PORT:-7676}
 
 curl \
     --data-urlencode "name=${ARG_NAME}" \
     --data-urlencode "path=${ARG_PATH}" \
     --data-urlencode "label=${ARG_LABEL}" \
-    http://filebot:7676/amc
+    http://filebot:${FILEBOT_PORT}/amc
