@@ -106,5 +106,5 @@ EOF
 
 # take control of permissions
 chown -R abc:abc \
-	/config \
-	/downloads
+        /config \
+        /downloads
