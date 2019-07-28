@@ -9,8 +9,12 @@ ARG_LABEL="N/A"
 CONFIG_OUTPUT="/media"
 FILEBOT_PORT=${FILEBOT_PORT:-7676}
 
-curl \
+FILEBOT_CMD=$(\
+echo curl \
     --data-urlencode "name=${ARG_NAME}" \
     --data-urlencode "path=${ARG_PATH}" \
     --data-urlencode "label=${ARG_LABEL}" \
-    http://filebot:${FILEBOT_PORT}/amc
+    http://filebot:${FILEBOT_PORT}/amc)
+
+echo $FILEBOT_CMD >> /config/filebot.log
+$FILEBOT_CMD
