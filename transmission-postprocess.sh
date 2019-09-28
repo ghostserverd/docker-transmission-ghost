@@ -17,4 +17,4 @@ echo curl \
     http://filebot:${FILEBOT_PORT}/amc)
 
 echo $FILEBOT_CMD >> /config/filebot.log
-$FILEBOT_CMD
+eval $FILEBOT_CMD
