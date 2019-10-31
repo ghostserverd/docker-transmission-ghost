@@ -34,7 +34,7 @@ CONFIG_STR=$(cat <<'HEREDOC'
     "peer-congestion-algorithm": "",
     "peer-id-ttl-hours": 6,
     "peer-limit-global": 2000,
-    "peer-limit-per-torrent": 200,
+    "peer-limit-per-torrent": 100,
     "peer-port": CONN_PORT,
     "peer-port-random-high": 65535,
     "peer-port-random-low": 49152,
@@ -72,7 +72,7 @@ CONFIG_STR=$(cat <<'HEREDOC'
     "start-added-torrents": true,
     "trash-original-torrent-files": false,
     "umask": 2,
-    "upload-slots-per-torrent": 200,
+    "upload-slots-per-torrent": 100,
     "utp-enabled": true,
     "watch-dir": "/watch",
     "watch-dir-enabled": false
