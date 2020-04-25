@@ -3,5 +3,11 @@
 TRANS_MAX_RETENTION=${TRANS_MAX_RETENTION:-2592000}
 TRANS_MAX_RATIO=${TRANS_MAX_RATIO:-10}
 
-chown -R abc:abc \
-        /usr/local/bin
+# only chown the /usr/local/bin directory if it is not owned by abc:abc
+CHOWN_DIR=/usr/local/bin
+DIR_OWNER=`stat -c "%U:%G" $CHOWN_DIR`
+if [[ $DIR_OWNER != "abc:abc" ]]
+then
+    echo "chowning $CHOWN_DIR please be patient"
+    chown -R abc:abc $CHOWN_DIR
+fi
