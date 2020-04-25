@@ -1,4 +1,19 @@
 #!/usr/bin/with-contenv bash
+cat <<"EOF"
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+         _               _
+    __ _| |__   ___  ___| |_
+   / _` | '_ \ / _ \/ __| __/
+  | (_| | | | | (_) \__ \ |_
+   \__, |_| |_|\___/|___/\__|
+   |___/      /   _ \
+          (¯\| o (@) |/¯)
+           \_  .___.  _/
+            /   !_!   \
+           /_.--._.--._\
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+EOF
 
 TRANS_WEBUI_USER=${TRANS_WEBUI_USER:-admin}
 TRANS_WEBUI_PASS=${TRANS_WEBUI_PASS:-adminadmin}
@@ -87,22 +102,6 @@ CONFIG_STR=${CONFIG_STR/CONN_PORT/$TRANS_CONNECTION_PORT}
 
 rm /config/settings.json
 echo "$CONFIG_STR" > /config/settings.json
-
-cat <<"EOF"
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-         _               _
-    __ _| |__   ___  ___| |_
-   / _` | '_ \ / _ \/ __| __/
-  | (_| | | | | (_) \__ \ |_
-   \__, |_| |_|\___/|___/\__|
-   |___/      /   _ \
-          (¯\| o (@) |/¯)
-           \_  .___.  _/
-            /   !_!   \
-           /_.--._.--._\
-
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-EOF
 
 # only chown the /downloads directory if it is not owned by abc:abc
 CHOWN_DIR=/downloads
