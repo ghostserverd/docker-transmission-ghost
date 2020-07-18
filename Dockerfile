@@ -5,6 +5,9 @@ COPY root/ /
 
 WORKDIR /usr/local/bin
 
+# add default settings.json
+COPY settings.json settings.json
+
 # add transmission garbage collection
 COPY transmission-garbagecollect.sh transmission-garbagecollect.sh
 RUN chmod +rx transmission-garbagecollect.sh
