@@ -5,9 +5,9 @@
 #
 
 # This works if sonarr and radarr are set up to have a Category of sonarr and radarr respectively
-# If you are using other Categories to save your automated downloads, update the script where you see:
-#    "radarr"|"sonarr"|"tv-sonarr")
-# This script will not touch anything outside those Categories
+# If you are using other Categories to save your automated downloads, set TRANS_GC_CATEGORIES.
+# The variable content should be space separated for multiple categories i.e "cat1 cat2 cat3".
+# This script will not touch anything outside those Categories.
 
 # Set this file on a cron for every 5 minutes
 # Using Docker? Make your cron something like this:
@@ -18,6 +18,7 @@ shopt -s nocasematch
 
 TRANS_REMOTE_BIN="/usr/bin/transmission-remote"
 TRANS_HOST="127.0.0.1:${TRANS_WEBUI_PORT}"
+TRANS_GC_CATEGORIES=${TRANS_GC_CATEGORIES:-"radarr sonarr tv-sonarr"}
 
 # Amount of time (in seconds) after a torrent completes to delete them
 # default to 0 which disables entirely
@@ -26,6 +27,9 @@ RETENTION=${TRANS_MAX_RETENTION:-0}
 # Delete torrents only when ratio is above
 # default to 0 which disables entirely
 RATIO=${TRANS_MAX_RATIO:-0}
+
+# Create categories list out of env variable
+IFS=' ' read -a TORRENT_CATEGORIES_LIST <<< "$TRANS_GC_CATEGORIES"
 
 # Clean up torrents where trackers have torrent not registered
 # filter list by * (which signifies a tracker error)
@@ -38,8 +42,7 @@ do
   torrent_path=$(echo "${torrent_info}" | grep "Location: *" | sed 's/Location\:\s//i' | awk '{$1=$1};1')
   torrent_size=$(echo "${torrent_info}" | grep "Downloaded: *" | sed 's/Downloaded\:\s//i' | awk '{$1=$1};1')
   torrent_label=$(basename "${torrent_path}")
-  case "${torrent_label}" in
-    "radarr"|"sonarr"|"tv-sonarr")
+  case "${torrent_label}" in ${TORRENT_CATEGORIES_LIST[@]})
       torrent_error=$(echo "${torrent_info}" | grep "Got an error" | cut -d \" -f2)
       if [[ "${torrent_error}" =~ "unregistered" ]] || [[ "${torrent_error}" =~ "not registered" ]]; then
         # Delete torrent
