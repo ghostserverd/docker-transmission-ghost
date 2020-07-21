@@ -85,7 +85,7 @@ do
       fi
 
       # delete torrents greater than ${RATIO}
-      if [[ "${RATIO}" -ne "0" && "${RATIO}" -ne "" ]] && (( $(echo "${torrent_ratio} ${RATIO}" | awk '{print ($1 > $2)}') )); then
+      if [[ "${RATIO}" != "0" && "${RATIO}" != "" ]] && (( $(echo "${torrent_ratio} ${RATIO}" | awk '{print ($1 > $2)}') )); then
         echo "RATIO ${torrent_ratio}"
         echo "${torrent_label} ${torrent_name}"
         echo ""
