@@ -8,8 +8,14 @@ ARG_LABEL="N/A"
 # Configuration
 CONFIG_OUTPUT="/media"
 FILEBOT_PORT=${FILEBOT_PORT:-7676}
+
 SONARR_CATEGORY=${SONARR_CATEGORY:-"sonarr"}
+SONARR_PORT=${SONARR_PORT:-""}
+SONARR_API_KEY=${SONARR_API_KEY:-""}
+
 RADARR_CATEGORY=${RADARR_CATEGORY:-"radarr"}
+RADARR_PORT=${RADARR_PORT:-""}
+RADARR_API_KEY=${RADARR_API_KEY:-""}
 
 FILEBOT_CMD=$(\
 echo curl \
@@ -26,13 +32,17 @@ REFRESH_URL=""
 
 case $TR_TORRENT_DIR in
     *$SONARR_CATEGORY*)
-        REFRESH_NAME="RescanSeries"
-        REFRESH_URL="http://sonarr:${SONARR_PORT}/api/command?apikey=${SONARR_API_KEY}"
+        if [ $SONARR_PORT != "" ] && [ $SONARR_API_KEY != "" ]; then
+            REFRESH_NAME="RescanSeries"
+            REFRESH_URL="http://sonarr:${SONARR_PORT}/api/command?apikey=${SONARR_API_KEY}"
+	fi
     ;;
 
     *$RADARR_CATEGORY*)
-        REFRESH_NAME="RescanMovie"
-        REFRESH_URL="http://radarr:${RADARR_PORT}/api/command?apikey=${RADARR_API_KEY}"
+        if [ $RADARR_PORT != "" ] && [ $RADARR_API_KEY != "" ]; then
+            REFRESH_NAME="RescanMovie"
+            REFRESH_URL="http://radarr:${RADARR_PORT}/api/command?apikey=${RADARR_API_KEY}"
+        fi
     ;;
 esac
 
