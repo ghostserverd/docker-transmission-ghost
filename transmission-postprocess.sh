@@ -58,13 +58,20 @@ case $TR_TORRENT_DIR in
         if [ $SONARR_PORT != "" ] && [ $SONARR_API_KEY != "" ]; then
             REFRESH_NAME="RescanSeries"
             REFRESH_URL="http://sonarr:${SONARR_PORT}/api/command?apikey=${SONARR_API_KEY}"
-	fi
+	    fi
     ;;
 
     *$RADARR_CATEGORY*)
         if [ $RADARR_PORT != "" ] && [ $RADARR_API_KEY != "" ]; then
             REFRESH_NAME="RescanMovie"
             REFRESH_URL="http://radarr:${RADARR_PORT}/api/command?apikey=${RADARR_API_KEY}"
+        fi
+    ;;
+
+    *$LIDARR_CATEGORY*)
+        if [ $LIDARR_PORT != "" ] && [ $LIDARR_API_KEY != "" ]; then
+            REFRESH_NAME="RescanArtist"
+            REFRESH_URL="http://lidarr:${LIDARR_PORT}/api/v1/command?apikey=${LIDARR_API_KEY}"
         fi
     ;;
 esac
