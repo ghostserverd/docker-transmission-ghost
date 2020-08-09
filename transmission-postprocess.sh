@@ -58,7 +58,7 @@ case $TR_TORRENT_DIR in
         if [ $SONARR_PORT != "" ] && [ $SONARR_API_KEY != "" ]; then
             REFRESH_NAME="RescanSeries"
             REFRESH_URL="http://sonarr:${SONARR_PORT}/api/command?apikey=${SONARR_API_KEY}"
-	    fi
+        fi
     ;;
 
     *$RADARR_CATEGORY*)
