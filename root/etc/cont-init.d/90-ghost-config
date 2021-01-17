@@ -20,8 +20,12 @@ TRANS_WEBUI_PASS=${TRANS_WEBUI_PASS:-adminadmin}
 TRANS_WEBUI_PORT=${TRANS_WEBUI_PORT:-9091}
 TRANS_CONNECTION_PORT=${TRANS_CONNECTION_PORT:-51413}
 
-# copy the default transmission config if not already present
-cp -n /usr/local/bin/settings.json /config/settings.json
+# rpc-authentication-required should always be true
+# if it is not true, assume the settings.json is invalid and needs to be replaced
+RPC_AUTH=$(jq '."rpc-authentication-required"' /config/settings.json)
+if ! ((RPC_AUTH)); then
+    cp /usr/local/bin/settings.json /config/settings.json
+fi
 
 # set custom settings
 sed -i -E "s|\"peer-port\":.*$|\"peer-port\": $TRANS_CONNECTION_PORT,|g" /config/settings.json 

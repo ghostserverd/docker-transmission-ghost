@@ -8,6 +8,9 @@ WORKDIR /usr/local/bin
 # add default settings.json
 COPY settings.json settings.json
 
+# add jq for easier settings parsing
+RUN apk add jq
+
 # add transmission garbage collection
 COPY transmission-garbagecollect.sh transmission-garbagecollect.sh
 RUN chmod +rx transmission-garbagecollect.sh
