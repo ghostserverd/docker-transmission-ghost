@@ -36,7 +36,7 @@ sed -i -E "s|\"rpc-port\":.*$|\"rpc-port\": $TRANS_WEBUI_PORT,|g" /config/settin
 # only chown the /downloads directory if it is not owned by abc:abc or abc:users
 CHOWN_DIR=/downloads
 DIR_OWNER=`stat -c "%U:%G" $CHOWN_DIR`
-if [[ $DIR_OWNER != "abc:abc" ]] && [[ $DIR_OWNER != "abc:users" ]]
+if [[ $DIR_OWNER != "abc:abc" && $DIR_OWNER != "abc:users" ]]
 then
     echo "chowning $CHOWN_DIR please be patient"
     chown -R abc:abc $CHOWN_DIR
@@ -45,7 +45,7 @@ fi
 # only chown the /config directory if it is not owned by abc:abc or abc:users
 CHOWN_DIR=/config
 DIR_OWNER=`stat -c "%U:%G" $CHOWN_DIR`
-if [[ $DIR_OWNER != "abc:abc" ]] && [[ $DIR_OWNER != "abc:users" ]]
+if [[ $DIR_OWNER != "abc:abc" && $DIR_OWNER != "abc:users" ]]
 then
     echo "chowning $CHOWN_DIR please be patient"
     chown -R abc:abc $CHOWN_DIR
